@@ -87,6 +87,7 @@
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Task Title</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Workspace</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date</th>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Progress</th>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Assigned to</th>
                 <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
                   <span class="sr-only">View</span>
@@ -98,6 +99,12 @@
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ task.title }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ task.workspace.title }}</td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ task.date }}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <span class='text-cyan-600' v-if="task.todos.every(d => d.done === false) && task.todos.every(d => d.done !== true)">Not started yet</span>
+                  <span class="text-emerald-600" v-else-if="task.todos.every(d => d.done === true )">Completed</span>
+                  <span class='text-orange-500' v-else>In progress</span>
+                  
+                </td>
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ task.assignedUser.name }}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                 <router-link :to="`task/${task._id}`" class="text-indigo-600 hover:text-indigo-900"
